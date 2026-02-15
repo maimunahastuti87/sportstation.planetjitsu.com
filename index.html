@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SportStation - Premium Sport Shoes</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2b2b2b;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f50606;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #f50606;
+            transition: 0.3s;
+        }
+
+        .logo {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #f50606;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .nav-menu a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #f50606;
+            transition: 0.3s;
+        }
+
+        .nav-menu a:hover:after {
+            width: 100%;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 1.5rem;
+            color: white;
+        }
+
+        .nav-icons i {
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .nav-icons i:hover {
+            color: #f50606;
+            transform: scale(1.1);
+        }
+
+        /* Hero Section dengan Video Background */
+        .hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        #hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0,0,0,0.8), rgba(245,6,6,0.3));
+            z-index: -1;
+        }
+
+        .hero-content {
+            color: white;
+            z-index: 1;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: #f50606;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 50px;
+            transition: 0.3s;
+            animation: fadeInUp 1s ease 0.4s both;
+            border: 2px solid transparent;
+        }
+
+        .hero-btn:hover {
+            background: transparent;
+            border-color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(245,6,6,0.3);
+        }
+
+        /* Brand Strip */
+        .brand-strip {
+            background: white;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .brand-strip img {
+            height: 40px;
+            opacity: 0.7;
+            transition: 0.3s;
+            filter: grayscale(100%);
+        }
+
+        .brand-strip img:hover {
+            opacity: 1;
+            filter: grayscale(0);
+            transform: scale(1.1);
+        }
+
+        /* Categories */
+        .categories {
+            padding: 5rem 5%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            color: white;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: #f50606;
+            margin: 1rem auto;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .category-card {
+            position: relative;
+            height: 300px;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+
+        .category-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .category-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            display: flex;
+            align-items: flex-end;
+            padding: 2rem;
+            color: white;
+        }
+
+        .category-overlay h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Products Section */
+        .products {
+            padding: 5rem 5%;
+            background: #f5f5f5;
+        }
+
+        .product-filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.5rem;
+            border: 2px solid #333;
+            background: transparent;
+            color: #333;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            border-radius: 25px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: #f50606;
+            border-color: #f50606;
+            color: white;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 30px rgba(245,6,6,0.2);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: #f50606;
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            z-index: 1;
+        }
+
+        .product-image {
+            height: 280px;
+            background: #f9f9f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: 0.5s;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .product-actions {
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            transition: 0.3s;
+        }
+
+        .product-card:hover .product-actions {
+            bottom: 20px;
+        }
+
+        .product-actions button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background: white;
+            color: #333;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+
+        .product-actions button:hover {
+            background: #f50606;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .product-brand {
+            color: #f50606;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .product-info h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #333;
+            margin: 0.5rem 0;
+        }
+
+        .product-price del {
+            font-size: 1rem;
+            color: #999;
+            margin-right: 0.5rem;
+        }
+
+        .product-rating {
+            color: #ffc107;
+            margin-bottom: 1rem;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 0.8rem;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .add-to-cart:hover {
+            background: #f50606;
+        }
+
+        /* Featured Collection */
+        .featured {
+            padding: 5rem 5%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .featured-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .featured-content h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .featured-content p {
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .featured-btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: #f50606;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            border-radius: 50px;
+            transition: 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .featured-btn:hover {
+            background: transparent;
+            border-color: white;
+        }
+
+        .featured-image {
+            position: relative;
+        }
+
+        .featured-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 20px 20px 0 rgba(245,6,6,0.3);
+        }
+
+        /* Features */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            padding: 3rem 5%;
+            background: white;
+        }
+
+        .feature-item {
+            text-align: center;
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            background: #f5f5f5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #f50606;
+            transition: 0.3s;
+        }
+
+        .feature-item:hover .feature-icon {
+            background: #f50606;
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 5rem 5%;
+            background: #f5f5f5;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(245,6,6,0.1);
+        }
+
+        .testimonial-rating {
+            color: #ffc107;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-card p {
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .testimonial-author img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            margin-bottom: 0.2rem;
+        }
+
+        .author-info p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        /* Newsletter */
+        .newsletter {
+            padding: 4rem 5%;
+            background: linear-gradient(45deg, #f50606, #ff6b6b);
+            text-align: center;
+            color: white;
+        }
+
+        .newsletter h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter p {
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .newsletter-form {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+        }
+
+        .newsletter-form button {
+            padding: 1rem 2rem;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .newsletter-form button:hover {
+            background: #000;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 3rem 5% 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #f50606;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #999;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #f50606;
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: 0.3s;
+        }
+
+        .social-links a:hover {
+            background: #f50606;
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #999;
+        }
+
+        /* Quick View Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .close-modal:hover {
+            color: #f50606;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .featured-container {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .product-filters {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding: 1rem;
+                justify-content: flex-start;
+            }
+
+            .filter-btn {
+                flex: 0 0 auto;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.5s;
+        }
+
+        .loading.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 3px solid #f5f5f5;
+            border-top-color: #f50606;
+            border-radius: 50%;
+            animation: spin 1s infinite linear;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Animation -->
+    <div class="loading" id="loading">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="#" class="logo">SPORT<span>STATION</span></a>
+        <ul class="nav-menu">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#categories">Categories</a></li>
+            <li><a href="#featured">Featured</a></li>
+            <li><a href="#testimonials">Reviews</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="nav-icons">
+            <i class="fas fa-search"></i>
+            <i class="fas fa-user"></i>
+            <i class="fas fa-shopping-cart"></i>
+        </div>
+    </nav>
+
+    <!-- Hero Section dengan Video -->
+    <section id="home" class="hero">
+        <video autoplay muted loop id="hero-video">
+            <source src="https://player.vimeo.com/external/370331493.sd.mp4?s=4e3a5d5b4b8c9b9e9b4c9b9e9b4c9b9e&profile_id=165" type="video/mp4">
+            <!-- Fallback image jika video tidak bisa diputar -->
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 data-aos="fade-up">UNLEASH YOUR SPEED</h1>
+            <p data-aos="fade-up" data-aos-delay="200">Temukan koleksi sepatu olahraga terbaru dari brand ternama dengan performa terbaik</p>
+            <a href="#products" class="hero-btn" data-aos="fade-up" data-aos-delay="400">Shop Now</a>
+        </div>
+    </section>
+
+    <!-- Brand Strip -->
+    <div class="brand-strip">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Logo_NIKE.svg/1200px-Logo_NIKE.svg.png" alt="Nike">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/1200px-Adidas_Logo.svg.png" alt="Adidas">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/New_Balance_logo.svg/1200px-New_Balance_logo.svg.png" alt="New Balance">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Puma_AG_logo.svg/1200px-Puma_AG_logo.svg.png" alt="Puma">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Reebok_logo.svg/1200px-Reebok_logo.svg.png" alt="Reebok">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Under_Armour_logo.svg/1200px-Under_Armour_logo.svg.png" alt="Under Armour">
+    </div>
+
+    <!-- Categories -->
+    <section id="categories" class="categories">
+        <h2 class="section-title" data-aos="fade-up">Shop by Category</h2>
+        <div class="category-grid">
+            <div class="category-card" data-aos="fade-up">
+                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Running">
+                <div class="category-overlay">
+                    <div>
+                        <h3>Running</h3>
+                        <p>123 Products</p>
+                    </div>
+                </div>
+            </div>
+            <div class="category-card" data-aos="fade-up" data-aos-delay="100">
+                <img src="https://images.unsplash.com/photo-1516478177764-9fe5bd7e9717?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Basketball">
+                <div class="category-overlay">
+                    <div>
+                        <h3>Basketball</h3>
+                        <p>89 Products</p>
+                    </div>
+                </div>
+            </div>
+            <div class="category-card" data-aos="fade-up" data-aos-delay="200">
+                <img src="https://images.unsplash.com/photo-1511556532299-8f662fc26c06?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Training">
+                <div class="category-overlay">
+                    <div>
+                        <h3>Training</h3>
+                        <p>156 Products</p>
+                    </div>
+                </div>
+            </div>
+            <div class="category-card" data-aos="fade-up" data-aos-delay="300">
+                <img src="https://images.unsplash.com/photo-1465876765561-3e7e0b37cf8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Soccer">
+                <div class="category-overlay">
+                    <div>
+                        <h3>Soccer</h3>
+                        <p>92 Products</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products">
+        <h2 class="section-title" data-aos="fade-up">Featured Products</h2>
+        
+        <!-- Filter Buttons -->
+        <div class="product-filters" data-aos="fade-up">
+            <button class="filter-btn active">All</button>
+            <button class="filter-btn">Nike</button>
+            <button class="filter-btn">Adidas</button>
+            <button class="filter-btn">Puma</button>
+            <button class="filter-btn">New Balance</button>
+            <button class="filter-btn">Reebok</button>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="product-grid">
+            <!-- Nike Product -->
+            <div class="product-card" data-aos="fade-up">
+                <div class="product-badge">-20%</div>
+                <div class="product-image">
+                    <img src="https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/5c8c5f0a-0c7b-4b0a-8c5f-0a0c7b4b0a8c/air-max-270-shoes.png" alt="Nike Air Max 270">
+                    <div class="product-actions">
+                        <button><i class="far fa-heart"></i></button>
+                        <button><i class="fas fa-search"></i></button>
+                        <button><i class="fas fa-exchange-alt"></i></button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div class="product-brand">Nike</div>
+                    <h3>Air Max 270</h3>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span>(45)</span>
+                    </div>
+                    <div class="product-price">
+                        <del>Rp 2.500.000</del>
+                        Rp 2.000.000
+                    </div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Adidas Product -->
+            <div class="product-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="product-image">
+                    <img src="https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/8b8c5f0a0c7b4b0a8c5f0a0c7b4b0a8c_9366/Ultraboost_22_Shoes_Black_GZ0127_01_standard.jpg" alt="Adidas Ultraboost 22">
+                    <div class="product-actions">
+                        <button><i class="far fa-heart"></i></button>
+                        <button><i class="fas fa-search"></i></button>
+                        <button><i class="fas fa-exchange-alt"></i></button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div class="product-brand">Adidas</div>
+                    <h3>Ultraboost 22</h3>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <span>(78)</span>
+                    </div>
+                    <div class="product-price">Rp 3.200.000</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Puma Product -->
+            <div class="product-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="product-badge">New</div>
+                <div class="product-image">
+                    <img src="https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa/global/377248/01/sv01/fnd/IND/w/1000/h/1000/fmt/png" alt="Puma RS-X">
+                    <div class="product-actions">
+                        <button><i class="far fa-heart"></i></button>
+                        <button><i class="fas fa-search"></i></button>
+                        <button><i class="fas fa-exchange-alt"></i></button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div class="product-brand">Puma</div>
+                    <h3>RS-X³</h3>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span>(34)</span>
+                    </div>
+                    <div class="product-price">Rp 1.800.000</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- New Balance Product -->
+            <div class="product-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="product-image">
+                    <img src="https://nb.scene7.com/is/image/NB/m5740ta_nb_02_i?$pdpflexf2$&wid=440&hei=440" alt="New Balance 574">
+                    <div class="product-actions">
+                        <button><i class="far fa-heart"></i></button>
+                        <button><i class="fas fa-search"></i></button>
+                        <button><i class="fas fa-exchange-alt"></i></button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div class="product-brand">New Balance</div>
+                    <h3>574 Classic</h3>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <span>(56)</span>
+                    </div>
+                    <div class="product-price">Rp 1.500.000</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Reebok Product -->
+            <div class="product-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="product-badge">-15%</div>
+                <div class="product-image">
+                    <img src="https://assets.reebok.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/8b8c5f0a0c7b4b0a8c5f0a0c7b4b0a8c/classic-leather-shoes.jpg" alt="Reebok Classic Leather">
+                    <div class="product-actions">
+                        <button><i class="far fa-heart"></i></button>
+                        <button><i class="fas fa-search"></i></button>
+                        <button><i class="fas fa-exchange-alt"></i></button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div class="product-brand">Reebok</div>
+                    <h3>Classic Leather</h3>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <span>(92)</span>
+                    </div>
+                    <div class="product-price">
+                        <del>Rp 1.200.000</del>
+                        Rp 1.020.000
+                    </div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Nike Limited Edition -->
+            <div class="product-card" data-aos="fade-up" data-aos-delay="500">
+                <div class="product-badge">Limited</div>
+                <div class="product-image">
+                    <img src="https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/5c8c5f0a-0c7b-4b0a-8c5f-0a0c7b4b0a8c/air-jordan-1-mid-shoes.png" alt="Air Jordan 1 Mid">
+                    <div class="product-actions">
+                        <button><i class="far fa-heart"></i></button>
+                        <button><i class="fas fa-search"></i></button>
+                        <button><i class="fas fa-exchange-alt"></i></button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div class="product-brand">Air Jordan</div>
+                    <h3>AJ 1 Mid</h3>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span>(112)</span>
+                    </div>
+                    <div class="product-price">Rp 2.800.000</div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Collection -->
+    <section id="featured" class="featured">
+        <div class="featured-container">
+            <div class="featured-content" data-aos="fade-right">
+                <h2>SUMMER COLLECTION 2024</h2>
+                <p>Temukan koleksi sepatu olahraga terbaru dengan teknologi terkini untuk performa maksimal. Dapatkan diskon spesial hingga 50% untuk pembelian pertama!</p>
+                <a href="#" class="featured-btn">Shop Collection</a>
+            </div>
+            <div class="featured-image" data-aos="fade-left">
+                <img src="https://images.unsplash.com/photo-1556906781-9a412961c28c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Featured Collection">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <div class="features">
+        <div class="feature-item" data-aos="fade-up">
+            <div class="feature-icon">
+                <i class="fas fa-truck"></i>
+            </div>
+            <h3>Free Shipping</h3>
+            <p>Min. belanja Rp 500.000</p>
+        </div>
+        <div class="feature-item" data-aos="fade-up" data-aos-delay="100">
+            <div class="feature-icon">
+                <i class="fas fa-undo-alt"></i>
+            </div>
+            <h3>30 Days Return</h3>
+            <p>Garansi uang kembali</p>
+        </div>
+        <div class="feature-item" data-aos="fade-up" data-aos-delay="200">
+            <div class="feature-icon">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3>100% Original</h3>
+            <p>Garansi produk original</p>
+        </div>
+        <div class="feature-item" data-aos="fade-up" data-aos-delay="300">
+            <div class="feature-icon">
+                <i class="fas fa-headset"></i>
+            </div>
+            <h3>24/7 Support</h3>
+            <p>Customer service siap membantu</p>
+        </div>
+    </div>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="testimonials">
+        <h2 class="section-title" data-aos="fade-up">What Our Customers Say</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card" data-aos="fade-up">
+                <div class="testimonial-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p>"Sepatu original dengan harga terjangkau. Pengiriman cepat dan packaging aman. Sangat recommended!"</p>
+                <div class="testimonial-author">
+                    <img src="https://images.unsplash.com/photo-1494790108777-847ef6b6f6f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Customer">
+                    <div class="author-info">
+                        <h4>Sarah Wijaya</h4>
+                        <p>Running Enthusiast</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="testimonial-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p>"Koleksinya lengkap dari berbagai brand. Pelayanannya ramah dan responsif. Pasti akan belanja lagi!"</p>
+                <div class="testimonial-author">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Customer">
+                    <div class="author-info">
+                        <h4>Budi Santoso</h4>
+                        <p>Basketball Player</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="testimonial-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <p>"Harga bersaing dan banyak promo. Size chart-nya akurat, jadi tidak salah ukuran. Mantap!"</p>
+                <div class="testimonial-author">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Customer">
+                    <div class="author-info">
+                        <h4>Dewi Lestari</h4>
+                        <p>Fitness Trainer</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <h2 data-aos="fade-up">Subscribe to Our Newsletter</h2>
+        <p data-aos="fade-up" data-aos-delay="100">Dapatkan info promo terbaru dan koleksi eksklusif langsung di email Anda</p>
+        <form class="newsletter-form" data-aos="fade-up" data-aos-delay="200">
+            <input type="email" placeholder="Masukkan email Anda" required>
+            <button type="submit">Subscribe</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>SPORTSTATION</h3>
+                <p>Premium sport shoes retailer dengan koleksi terlengkap dari brand-brand ternama.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#categories">Categories</a></li>
+                    <li><a href="#featured">Featured</a></li>
+                    <li><a href="#testimonials">Reviews</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Customer Service</h3>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Shipping Policy</a></li>
+                    <li><a href="#">Return Policy</a></li>
+                    <li><a href="#">Size Guide</a></li>
+                    <li><a href="#">Payment Methods</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> Jakarta, Indonesia</li>
+                    <li><i class="fas fa-phone"></i> +62 812 3456 7890</li>
+                    <li><i class="fas fa-envelope"></i> info@sportstation.com</li>
+                    <li><i class="fas fa-clock"></i> Mon-Sat: 09:00 - 21:00</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2024 SportStation. All Rights Reserved. Designed for shoe lovers.</p>
+        </div>
+    </footer>
+
+    <!-- Quick View Modal -->
+    <div class="modal" id="quickViewModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Quick View</h2>
+            <p>Fitur quick view akan segera hadir!</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Loading Animation
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loading').classList.add('hidden');
+            }, 1000);
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(0, 0, 0, 0.98)';
+                navbar.style.padding = '0.5rem 5%';
+            } else {
+                navbar.style.background = 'rgba(0, 0, 0, 0.95)';
+                navbar.style.padding = '1rem 5%';
+            }
+        });
+
+        // Filter Buttons
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                // Di sini Anda bisa menambahkan logic filtering produk
+            });
+        });
+
+        // Quick View Modal
+        const modal = document.getElementById('quickViewModal');
+        const closeModal = document.querySelector('.close-modal');
+        const searchBtns = document.querySelectorAll('.fa-search');
+
+        searchBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                modal.style.display = 'flex';
+            });
+        });
+
+        closeModal.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add to Cart Animation
+        const addToCartBtns = document.querySelectorAll('.add-to-cart');
+        addToCartBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const originalText = this.textContent;
+                this.textContent = 'Added!';
+                this.style.background = '#4CAF50';
+                
+                setTimeout(() => {
+                    this.textContent = originalText;
+                    this.style.background = '#333';
+                }, 2000);
+            });
+        });
+
+        // Wishlist Toggle
+        const wishlistBtns = document.querySelectorAll('.fa-heart');
+        wishlistBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.classList.toggle('far');
+                this.classList.toggle('fas');
+                if (this.classList.contains('fas')) {
+                    this.style.color = '#f50606';
+                } else {
+                    this.style.color = '';
+                }
+            });
+        });
+
+        // Newsletter Form
+        const newsletterForm = document.querySelector('.newsletter-form');
+        newsletterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('input[type="email"]').value;
+            if (email) {
+                alert('Terima kasih telah berlangganan!');
+                this.reset();
+            }
+        });
+
+        // Parallax Effect untuk Hero
+        window.addEventListener('scroll', function() {
+            const hero = document.querySelector('.hero');
+            const scrolled = window.pageYOffset;
+            hero.style.backgroundPositionY = scrolled * 0.5 + 'px';
+        });
+    </script>
+</body>
+</html>
